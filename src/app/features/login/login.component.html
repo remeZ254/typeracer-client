@@ -1,0 +1,13 @@
+<header class="header">typeracer</header>
+
+<main class="card">
+  <div class="card-header">Choose a nickname</div>
+  <input type="text" class="input" [(ngModel)]="auth" />
+  <button class="button" (click)="login()">Continue</button>
+</main>
+
+<footer class="footer">
+  <span class="footer-item">{{ creatorName }}</span>
+  <span class="footer-item">•</span>
+  <span class="footer-item">{{ creatorNumber }}</span>
+</footer>
