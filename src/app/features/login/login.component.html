@@ -1,8 +1,14 @@
 <header class="header">typeracer</header>
 
-<main class="card">
+<main class="card" (keydown.enter)="login()">
   <div class="card-header">Choose a nickname</div>
-  <input type="text" class="input" [(ngModel)]="auth" />
+  <input
+    type="text"
+    class="input"
+    [class.error]="showError"
+    [class.shake]="shakeInput"
+    (input)="onInput($event)"
+  />
   <button class="button" (click)="login()">Continue</button>
 </main>
 

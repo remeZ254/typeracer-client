@@ -17,6 +17,26 @@
     @apply border-gray-300 border-b-4 rounded focus:border-purple-600;
     @apply bg-gray-200 text-gray-700 focus:outline-none;
     @apply transition duration-500;
+
+    &.error {
+      @apply border-red-500 focus:border-red-500;
+    }
+
+    &.shake {
+      animation: shake 300ms;
+
+      @keyframes shake {
+        25% {
+          transform: translate(4px);
+        }
+        50% {
+          transform: translate(-4px);
+        }
+        75% {
+          transform: translate(4px);
+        }
+      }
+    }
   }
 
   .button {
