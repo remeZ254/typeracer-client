@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth/service/auth.service';
+import { RoutesEnum } from '@app/shared/models/routes/routes.model';
+import { timer } from 'rxjs';
+
+import { AuthService } from '@app/core/auth/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +22,11 @@ export class LoginComponent {
   login() {
     if (this.auth) {
       this.authService.logIn(this.auth);
-      this.router.navigate(['/']);
+      this.router.navigate([RoutesEnum.HOME]);
     } else {
       this.showError = true;
       this.shakeInput = true;
+      timer(300).subscribe(() => (this.shakeInput = false));
     }
   }
 

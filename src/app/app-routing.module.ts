@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 import { AuthGuard } from './core/auth/guard/auth.guard';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: RoutesEnum.HOME,
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: RoutesEnum.LOGIN,
+    component: LoginComponent
   }
 ];
 
