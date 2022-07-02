@@ -80,39 +80,6 @@
       true,
       "allow-named-functions"
     ],
-    "ordered-imports": [
-      true,
-      {
-        "grouped-imports": true,
-        "groups": [
-          {
-            "name": "app",
-            "match": "^@app",
-            "order": 20
-          },
-          {
-            "name": "shared",
-            "match": "^@shared",
-            "order": 20
-          },
-          {
-            "name": "relative_paths",
-            "match": "^[.][.]?",
-            "order": 20
-          },
-          {
-            "name": "scoped_paths",
-            "match": "^@",
-            "order": 10
-          },
-          {
-            "name": "absolute_paths",
-            "match": "^[a-zA-Z]",
-            "order": 10
-          }
-        ]
-      }
-    ],
     "prefer-for-of": true,
     "prefer-object-spread": true,
     "quotemark": [
