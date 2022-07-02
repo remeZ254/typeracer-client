@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthService {
-  private readonly authKey = 'auth';
+  private readonly authKey = 'nickName';
 
   constructor(private cookieService: CookieService) {}
 
