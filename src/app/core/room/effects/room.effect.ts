@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Room } from '@app/shared/models/room/room.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs';
 
-import { connectToSubscription, disconnectFromSubscription } from '../actions/subscription.actions';
 import { SubscriptionService } from '../services/subscription.service';
+import {
+  connectedToSubscription,
+  connectToSubscription,
+  disconnectFromSubscription,
+  newRoomMessage,
+} from '../actions/room.actions';
 
 @Injectable()
-export class SubscriptionEffect {
+export class RoomEffect {
   connect$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -23,6 +29,14 @@ export class SubscriptionEffect {
         tap(() => this.subscriptionService.disconnect())
       ),
     { dispatch: false }
+  );
+
+  onRoomMessage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(connectedToSubscription),
+      mergeMap(() => this.subscriptionService.eventMessages$<Room>('room')),
+      map((room: Room) => newRoomMessage({ room }))
+    )
   );
 
   constructor(private actions$: Actions, private subscriptionService: SubscriptionService) {}

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '@app/core/auth/service/auth.service';
-import { connectToSubscription } from '@app/core/subscription/actions/subscription.actions';
-import { SubscriptionState } from '@app/core/subscription/reducers/subscription.reducer';
+import { connectToSubscription } from '@app/core/room/actions/room.actions';
+import { RoomState } from '@app/core/room/reducers/room.reducer';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { SubscriptionState } from '@app/core/subscription/reducers/subscription.
 export class HomeComponent {
   readonly auth: string;
 
-  constructor(private authService: AuthService, private store: Store<SubscriptionState>) {
+  constructor(private authService: AuthService, private store: Store<RoomState>) {
     this.auth = authService.getAuth();
   }
 
