@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of, switchMap, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
+import { connectToSubscription, disconnectFromSubscription } from '../actions/subscription.actions';
 import { SubscriptionService } from '../services/subscription.service';
-import { connectedToSubscription, connectToSubscription } from '../actions/subscription.actions';
 
 @Injectable()
 export class SubscriptionEffect {
-  connect$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(connectToSubscription),
-      tap(() => this.subscriptionService.connect()),
-      switchMap(() => of(connectedToSubscription()))
-    )
+  connect$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(connectToSubscription),
+        tap(() => this.subscriptionService.connect())
+      ),
+    { dispatch: false }
+  );
+
+  disconnect$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(disconnectFromSubscription),
+        tap(() => this.subscriptionService.disconnect())
+      ),
+    { dispatch: false }
   );
 
   constructor(private actions$: Actions, private subscriptionService: SubscriptionService) {}

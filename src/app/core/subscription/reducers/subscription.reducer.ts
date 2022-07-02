@@ -1,4 +1,7 @@
-import { connectedToSubscription } from '@app/core/subscription/actions/subscription.actions';
+import {
+  connectedToSubscription,
+  disconnectedFromSubscription,
+} from '@app/core/subscription/actions/subscription.actions';
 import { createReducer, on } from '@ngrx/store';
 
 export const SUBSCRIPTION_STATE_TOKEN = 'subscription';
@@ -23,6 +26,13 @@ export const subscriptionReducer = createReducer(
     (state: SubscriptionState): SubscriptionState => ({
       ...state,
       status: SubscriptionStatus.CONNECTED,
+    })
+  ),
+  on(
+    disconnectedFromSubscription,
+    (state: SubscriptionState): SubscriptionState => ({
+      ...state,
+      status: SubscriptionStatus.DISCONNECTED,
     })
   )
 );
