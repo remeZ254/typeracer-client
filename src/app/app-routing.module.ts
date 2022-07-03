@@ -19,8 +19,7 @@ const routes: Routes = [
   },
   {
     path: RoutesEnum.ROOM,
-    component: RoomComponent,
-    canActivate: [AuthGuard]
+    component: RoomComponent
   }
 ];
 

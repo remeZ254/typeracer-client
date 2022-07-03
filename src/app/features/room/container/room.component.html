@@ -1,1 +1,25 @@
-<p>room works!</p>
+<main class="card" *ngIf="room$ | async as room">
+  <p>room {{ room.id }}</p>
+
+  <div class="race">
+    race
+    <div class="player" *ngFor="let player of room.players">
+      <div class="track">
+        <div class="racer" [style.--progress]="player.completedWords / room.words.length">
+          <div class="name-container">
+            {{ player.nickName }}
+          </div>
+          <img class="car" src="assets/svg/cars/car.svg" alt="car" />
+        </div>
+      </div>
+      <div class="score">
+        <span class="vertical-center"></span>
+        <span>{{ player.wpm }} wpm</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">
+    {{ room.words.join(' ') }}
+  </div>
+</main>

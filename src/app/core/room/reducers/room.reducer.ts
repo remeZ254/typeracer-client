@@ -24,6 +24,7 @@ export const roomInitialState: RoomState = {
     id: '',
     status: RoomStatus.DONE,
     players: [],
+    words: [],
   },
 };
 

@@ -1,0 +1,40 @@
+.card {
+  @apply flex flex-col;
+  @apply max-w-screen-xl mx-auto my-10 p-8;
+  @apply bg-white rounded-lg shadow-2xl;
+}
+
+.player {
+  @apply flex flex-row;
+  @apply text-slate-600 font-bold;
+
+  .track {
+    @apply w-5/6 p-1;
+    @apply border-dashed border-amber-400 border-b-4;
+
+    .racer {
+      @apply flex flex-row;
+      @apply max-h-14;
+      margin-left: calc((100% - 16rem) * var(--progress) );
+
+      .name-container{
+        @apply w-28;
+        @apply inline-block overflow-hidden whitespace-nowrap;
+        @apply text-right text-ellipsis;
+      }
+
+      .car {
+        @apply w-36;
+      }
+    }
+  }
+
+  .score {
+    @apply w-1/6;
+    @apply text-2xl;
+
+    .vertical-center {
+      @apply inline-block align-middle h-full;
+    }
+  }
+}

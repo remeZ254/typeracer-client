@@ -2,6 +2,7 @@ export interface Room {
   id: string;
   status: RoomStatus;
   players: Player[];
+  words: string[];
 }
 
 export enum RoomStatus {
@@ -13,4 +14,6 @@ export enum RoomStatus {
 export interface Player {
   socketId: string;
   nickName: string;
+  completedWords: number;
+  wpm: number;
 }
