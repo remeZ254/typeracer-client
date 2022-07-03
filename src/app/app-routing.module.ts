@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoomComponent } from '@app/features/room/container/room.component';
 
 import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 import { AuthGuard } from './core/auth/guard/auth.guard';
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: RoutesEnum.LOGIN,
     component: LoginComponent
+  },
+  {
+    path: RoutesEnum.ROOM,
+    component: RoomComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

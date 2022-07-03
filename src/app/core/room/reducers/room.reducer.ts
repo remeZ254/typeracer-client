@@ -1,10 +1,10 @@
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import {
   connectedToSubscription,
   disconnectedFromSubscription,
   newRoomMessage,
 } from '@app/core/room/actions/room.actions';
 import { Room, RoomStatus } from '@app/shared/models/room/room.model';
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 export const ROOM_STATE_TOKEN = 'room';
 
@@ -55,3 +55,5 @@ export const roomReducer = createReducer(
 const getRoomState = createFeatureSelector<RoomState>(ROOM_STATE_TOKEN);
 
 export const getRoom = createSelector(getRoomState, (roomState: RoomState) => roomState.room);
+
+export const getRoomId = createSelector(getRoom, (room: Room) => room.id);
