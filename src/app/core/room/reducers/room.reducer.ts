@@ -2,7 +2,7 @@ import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/
 import {
   connectedToSubscription,
   disconnectedFromSubscription,
-  newRoomMessage,
+  newRoomMessage
 } from '@app/core/room/actions/room.actions';
 import { Room, RoomStatus } from '@app/shared/models/room/room.model';
 
@@ -24,8 +24,12 @@ export const roomInitialState: RoomState = {
     id: '',
     status: RoomStatus.DONE,
     players: [],
-    words: [],
-  },
+    text: {
+      quote: '',
+      author: '',
+      category: ''
+    }
+  }
 };
 
 export const roomReducer = createReducer(
@@ -34,21 +38,21 @@ export const roomReducer = createReducer(
     connectedToSubscription,
     (state: RoomState): RoomState => ({
       ...state,
-      subscriptionStatus: SubscriptionStatus.CONNECTED,
+      subscriptionStatus: SubscriptionStatus.CONNECTED
     })
   ),
   on(
     disconnectedFromSubscription,
     (state: RoomState): RoomState => ({
       ...state,
-      subscriptionStatus: SubscriptionStatus.DISCONNECTED,
+      subscriptionStatus: SubscriptionStatus.DISCONNECTED
     })
   ),
   on(
     newRoomMessage,
     (state: RoomState, { room }: { room: Room }): RoomState => ({
       ...state,
-      room,
+      room
     })
   )
 );

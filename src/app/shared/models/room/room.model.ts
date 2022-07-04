@@ -2,7 +2,7 @@ export interface Room {
   id: string;
   status: RoomStatus;
   players: Player[];
-  words: string[];
+  text: Quote;
 }
 
 export enum RoomStatus {
@@ -16,4 +16,10 @@ export interface Player {
   nickName: string;
   completedWords: number;
   wpm: number;
+}
+
+export interface Quote {
+  quote: string;
+  author: string;
+  category: string;
 }
