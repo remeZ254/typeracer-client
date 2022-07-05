@@ -14,7 +14,7 @@ export enum RoomStatus {
 export interface Player {
   socketId: string;
   nickName: string;
-  completedWords: number;
+  wordIndex: number;
   wpm: number;
 }
 

@@ -1,25 +1,44 @@
 <main class="card" *ngIf="room$ | async as room">
   <p>room {{ room.id }}</p>
 
-  <div class="race">
-    race
-    <div class="player" *ngFor="let player of room.players">
-      <div class="track">
-        <div class="racer" [style.--progress]="player.completedWords / room.text.quote.length || 0">
-          <div class="name-container">
-            {{ player.nickName }}
-          </div>
-          <img class="car" src="assets/svg/cars/car.svg" alt="car" />
+  <div class="player" *ngFor="let player of room.players">
+    <div class="track">
+      <div class="racer" [style.--progress]="player.wordIndex / room.text.quote.length || 0">
+        <div class="name-container">
+          {{ player.nickName }}
         </div>
+        <img class="car" src="assets/svg/cars/car.svg" alt="car" />
       </div>
-      <div class="score">
-        <span class="vertical-center"></span>
-        <span>{{ player.wpm }} wpm</span>
-      </div>
+    </div>
+    <div class="score">
+      <span class="vertical-center"></span>
+      <span>{{ player.wpm }} wpm</span>
     </div>
   </div>
 
   <div class="quote">
-    {{ room.text.quote }}
+    <span class="completed">{{ completedDisplay.completed }}</span>
+    <span class="completed in-progress">{{ completedDisplay.completedInProgress }}</span>
+    <ng-container *ngIf="valid">
+      <span class="in-progress">{{ validDisplay.inProgress }}</span>
+      <span> {{ validDisplay.rest }}</span>
+    </ng-container>
+    <ng-container *ngIf="!valid">
+      <span class="invalid in-progress">{{ invalidDisplay.invalidInProgress }}</span>
+      <span class="in-progress">{{ invalidDisplay.inProgress }}</span>
+      <span class="invalid">{{ invalidDisplay.invalid }}</span>
+      <span>{{ invalidDisplay.rest }}</span>
+    </ng-container>
+  </div>
+
+  <div class="input-container">
+    <input
+      type="text"
+      class="input"
+      spellcheck="false"
+      [class.error]="!valid"
+      [(ngModel)]="input"
+      (input)="onInput()"
+    />
   </div>
 </main>
