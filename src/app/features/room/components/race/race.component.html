@@ -1,0 +1,21 @@
+<div class="race">
+  <div class="quote">
+    <span class="completed">{{ quoteDisplay.completed.rest }}</span>
+    <span class="completed in-progress">{{ quoteDisplay.completed.inProgress }}</span>
+    <span class="invalid in-progress" *ngIf="isInvalid">{{ quoteDisplay.invalid.inProgress }}</span>
+    <span class="in-progress">{{ quoteDisplay.valid.inProgress }}</span>
+    <span class="invalid" *ngIf="isInvalid">{{ quoteDisplay.invalid.rest }}</span>
+    <span>{{ quoteDisplay.valid.rest }}</span>
+  </div>
+
+  <div class="input-container">
+    <input
+      type="text"
+      class="input"
+      spellcheck="false"
+      [class.error]="isInvalid"
+      [(ngModel)]="input"
+      (input)="onInput()"
+    />
+  </div>
+</div>
