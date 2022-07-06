@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { getRoom, RoomState } from '@app/core/room/reducers/room.reducer';
-import { roomMock } from '@app/shared/mocks/room/room.mock';
-import { Room } from '@app/shared/models/room/room.model';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { first, Observable, of } from 'rxjs';
+import { first, Observable } from 'rxjs';
+
+import { getRoom, RoomState } from '@app/core/room/reducers/room.reducer';
+import { Room } from '@app/shared/models/room/room.model';
+import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 
 @Component({
   selector: 'app-room',
@@ -15,11 +16,11 @@ export class RoomComponent {
   uncompletedWords: string[] = [];
   readonly room$: Observable<Room>;
 
-  constructor(private route: ActivatedRoute, private store: Store<RoomState>) {
+  constructor(private store: Store<RoomState>, private router: Router) {
     this.room$ = this.store.pipe(select(getRoom));
-    this.room$ = of(roomMock);
-    this.room$
-      .pipe(first())
-      .subscribe(({ text: { quote } }) => (this.uncompletedWords = quote.split(' ')));
+    this.room$.pipe(first()).subscribe(({ id, text: { quote } }: Room) => {
+      !id && this.router.navigate([RoutesEnum.HOME]);
+      this.uncompletedWords = quote.split(' ');
+    });
   }
 }
