@@ -17,18 +17,12 @@
   </div>
 
   <div class="quote">
-    <span class="completed">{{ completedDisplay.completed }}</span>
-    <span class="completed in-progress">{{ completedDisplay.completedInProgress }}</span>
-    <ng-container *ngIf="valid">
-      <span class="in-progress">{{ validDisplay.inProgress }}</span>
-      <span> {{ validDisplay.rest }}</span>
-    </ng-container>
-    <ng-container *ngIf="!valid">
-      <span class="invalid in-progress">{{ invalidDisplay.invalidInProgress }}</span>
-      <span class="in-progress">{{ invalidDisplay.inProgress }}</span>
-      <span class="invalid">{{ invalidDisplay.invalid }}</span>
-      <span>{{ invalidDisplay.rest }}</span>
-    </ng-container>
+    <span class="completed">{{ quoteDisplay.completed.rest }}</span>
+    <span class="completed in-progress">{{ quoteDisplay.completed.inProgress }}</span>
+    <span class="invalid in-progress" *ngIf="isInvalid">{{ quoteDisplay.invalid.inProgress }}</span>
+    <span class="in-progress">{{ quoteDisplay.valid.inProgress }}</span>
+    <span class="invalid" *ngIf="isInvalid">{{ quoteDisplay.invalid.rest }}</span>
+    <span>{{ quoteDisplay.valid.rest }}</span>
   </div>
 
   <div class="input-container">
@@ -36,7 +30,7 @@
       type="text"
       class="input"
       spellcheck="false"
-      [class.error]="!valid"
+      [class.error]="isInvalid"
       [(ngModel)]="input"
       (input)="onInput()"
     />

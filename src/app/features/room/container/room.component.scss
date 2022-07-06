@@ -43,7 +43,7 @@
   @apply text-xl;
 
   .invalid {
-    @apply text-rose-500;
+    @apply text-red-500 bg-red-200;
   }
 
   .completed {
