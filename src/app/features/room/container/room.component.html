@@ -1,6 +1,5 @@
 <main class="card" *ngIf="room$ | async as room">
-  <p>room {{ room.id }}</p>
-
+  {{room.countdown}}
   <app-track [room]="room"></app-track>
   <app-race [uncompletedWords]="uncompletedWords"></app-race>
 </main>

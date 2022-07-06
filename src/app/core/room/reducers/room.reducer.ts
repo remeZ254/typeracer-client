@@ -28,7 +28,8 @@ export const roomInitialState: RoomState = {
       quote: '',
       author: '',
       category: ''
-    }
+    },
+    countdown: -1
   }
 };
 

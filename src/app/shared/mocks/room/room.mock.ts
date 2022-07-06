@@ -24,4 +24,5 @@ export const roomMock: Room = {
     author: 'zemer',
     category: 'mocks',
   },
+  countdown: 33
 };

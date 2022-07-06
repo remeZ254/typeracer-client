@@ -3,6 +3,7 @@ export interface Room {
   status: RoomStatus;
   players: Player[];
   text: Quote;
+  countdown: number;
 }
 
 export enum RoomStatus {
