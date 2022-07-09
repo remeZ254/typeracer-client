@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { sendPlayerUpdate } from '@app/core/room/actions/room.actions';
 import { select, Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 
@@ -22,5 +23,9 @@ export class RoomComponent {
       !id && this.router.navigate([RoutesEnum.HOME]);
       this.uncompletedWords = quote.split(' ');
     });
+  }
+
+  onCorrectWord(wordIndex: number) {
+    this.store.dispatch(sendPlayerUpdate({ wordIndex }));
   }
 }

@@ -1,6 +1,9 @@
 <div class="player" *ngFor="let player of room.players">
   <div class="track">
-    <div class="racer" [style.--progress]="player.wordIndex / room.text.quote.length || 0">
+    <div
+      class="racer"
+      [style.--progress]="player.wordIndex / room.text.quote.split(' ').length || 0"
+    >
       <div class="name-container">
         {{ player.nickName }}
       </div>

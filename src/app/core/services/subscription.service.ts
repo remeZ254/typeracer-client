@@ -6,8 +6,11 @@ import { io, Socket } from 'socket.io-client';
 export abstract class SubscriptionService {
   private socket: Socket | undefined;
   abstract defaultEvent: string;
-  abstract connectedToSubscription: ActionCreator<any,()=>TypedAction<any>>;
-  abstract disconnectedFromSubscription: ActionCreator<any,()=>TypedAction<any>>;
+  abstract connectedToSubscription: ActionCreator<
+    any,
+    (props: { socketId: string }) => { socketId: string } & TypedAction<any>
+  >;
+  abstract disconnectedFromSubscription: ActionCreator<any, () => TypedAction<any>>;
 
   protected constructor(private store: Store<any>) {}
 
@@ -18,7 +21,9 @@ export abstract class SubscriptionService {
       });
     }
 
-    this.socket.on('connect', () => this.store.dispatch(this.connectedToSubscription()));
+    this.socket.on('connect', () =>
+      this.store.dispatch(this.connectedToSubscription({ socketId: this.socket!.id }))
+    );
     this.socket.on('disconnect', () => this.store.dispatch(this.disconnectedFromSubscription()));
   }
 
@@ -31,5 +36,9 @@ export abstract class SubscriptionService {
       this.socket?.on(event, (data: T) => observer.next(data));
       return this.socket?.close.bind(this.socket);
     });
+  }
+
+  sendMessage<T>(event: string, props: T) {
+    this.socket?.emit(event, props);
   }
 }

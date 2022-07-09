@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 interface QuoteDisplay {
   completed: {
@@ -22,6 +22,7 @@ interface QuoteDisplay {
 })
 export class RaceComponent implements OnInit {
   @Input() uncompletedWords!: string[];
+  @Output() correctWord: EventEmitter<number>;
   input: string = '';
   isInvalid: boolean = false;
   quoteDisplay: QuoteDisplay = {
@@ -32,6 +33,10 @@ export class RaceComponent implements OnInit {
   private completedChars: string = '';
   private completedWords: string[] = [];
   private wordIndex: number = 0;
+
+  constructor() {
+    this.correctWord = new EventEmitter<number>();
+  }
 
   ngOnInit() {
     this.formatDisplay();
@@ -45,6 +50,7 @@ export class RaceComponent implements OnInit {
       this.input = '';
       this.uncompletedWords.shift();
       this.completedWords.push(correctInput);
+      this.correctWord.emit(this.wordIndex);
     }
 
     if (!this.uncompletedWords.length) {
