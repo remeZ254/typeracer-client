@@ -13,6 +13,7 @@
       type="text"
       class="input"
       spellcheck="false"
+      [disabled]="!active"
       [class.error]="isInvalid"
       [(ngModel)]="input"
       (input)="onInput()"

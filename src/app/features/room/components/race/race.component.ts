@@ -21,6 +21,7 @@ interface QuoteDisplay {
   styleUrls: ['./race.component.scss'],
 })
 export class RaceComponent implements OnInit {
+  @Input() active!: boolean;
   @Input() uncompletedWords!: string[];
   @Output() correctWord: EventEmitter<number>;
   input: string = '';
@@ -43,6 +44,8 @@ export class RaceComponent implements OnInit {
   }
 
   onInput() {
+    if(!this.active) return;
+
     const correctInput = this.uncompletedWords[0] + (this.uncompletedWords.length !== 1 ? ' ' : '');
 
     if (this.input === correctInput) {

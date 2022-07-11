@@ -16,8 +16,9 @@
 
 .input {
   @apply w-full my-6 p-3;
-  @apply border-gray-300 border-b-4 rounded;
-  @apply bg-gray-200 focus:outline-none;
+  @apply border-b-4 rounded;
+  @apply bg-gray-200 disabled:bg-gray-300 border-gray-300  disabled:border-gray-400;
+  @apply focus:outline-none;
   @apply text-gray-600 text-3xl font-semibold;
   @apply transition duration-100;
 

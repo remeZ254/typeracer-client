@@ -12,9 +12,13 @@
       margin-left: calc((100% - 16rem) * var(--progress));
 
       .name-container {
+        @apply flex flex-col;
         @apply w-28;
-        @apply inline-block overflow-hidden whitespace-nowrap;
-        @apply text-right text-ellipsis;
+
+        .name {
+          @apply inline-block overflow-hidden whitespace-nowrap;
+          @apply text-right text-ellipsis;
+        }
       }
 
       .car {

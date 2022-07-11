@@ -5,7 +5,8 @@
       [style.--progress]="player.wordIndex / room.text.quote.split(' ').length || 0"
     >
       <div class="name-container">
-        {{ player.nickName }}
+        <div class="name">{{ player.nickName }}</div>
+        <div class="name" *ngIf='player.socketId === playerId'>(you)</div>
       </div>
       <img class="car" src="assets/svg/cars/car.svg" alt="car" />
     </div>
