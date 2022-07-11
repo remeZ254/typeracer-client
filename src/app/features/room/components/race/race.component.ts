@@ -44,7 +44,7 @@ export class RaceComponent implements OnInit {
   }
 
   onInput() {
-    if(!this.active) return;
+    if (!this.active) return;
 
     const correctInput = this.uncompletedWords[0] + (this.uncompletedWords.length !== 1 ? ' ' : '');
 
@@ -56,11 +56,6 @@ export class RaceComponent implements OnInit {
       this.correctWord.emit(this.wordIndex);
     }
 
-    if (!this.uncompletedWords.length) {
-      //TODO: game over
-      return;
-    }
-
     if (correctInput.startsWith(this.input)) {
       this.completedChars = this.input;
     }
@@ -70,35 +65,42 @@ export class RaceComponent implements OnInit {
 
   private formatDisplay() {
     this.isInvalid = !!(this.input && this.input !== this.completedChars);
-
-    this.quoteDisplay = {
-      completed: {
-        inProgress: this.completedChars,
-        rest: this.completedWords.join(' '),
-      },
-      valid: {
-        inProgress: this.isInvalid
-          ? this.uncompletedWords
-              .join(' ')
-              .slice(this.input.length, this.uncompletedWords[0].length)
-          : this.uncompletedWords[0].slice(this.completedChars.length),
-        rest: this.isInvalid
-          ? this.uncompletedWords
-              .join(' ')
-              .slice(Math.max(this.uncompletedWords[0].length, this.input.length))
-          : ` ${this.uncompletedWords.slice(1).join(' ')}`,
-      },
-      invalid: {
-        inProgress: this.uncompletedWords
-          .join(' ')
-          .slice(
-            this.completedChars.length,
-            Math.min(this.uncompletedWords[0].length, this.input.length)
-          ),
-        rest: this.uncompletedWords
-          .join(' ')
-          .slice(this.uncompletedWords[0].length, this.input.length),
-      },
-    };
+    if (this.uncompletedWords.length === 0) {
+      this.quoteDisplay = {
+        completed: { inProgress: '', rest: this.completedWords.join(' ') },
+        valid: { inProgress: '', rest: '' },
+        invalid: { inProgress: '', rest: '' },
+      }
+    } else {
+      this.quoteDisplay = {
+        completed: {
+          inProgress: this.completedChars,
+          rest: this.completedWords.join(' '),
+        },
+        valid: {
+          inProgress: this.isInvalid
+            ? this.uncompletedWords
+                .join(' ')
+                .slice(this.input.length, this.uncompletedWords[0].length)
+            : this.uncompletedWords[0].slice(this.completedChars.length),
+          rest: this.isInvalid
+            ? this.uncompletedWords
+                .join(' ')
+                .slice(Math.max(this.uncompletedWords[0].length, this.input.length))
+            : ` ${this.uncompletedWords.slice(1).join(' ')}`,
+        },
+        invalid: {
+          inProgress: this.uncompletedWords
+            .join(' ')
+            .slice(
+              this.completedChars.length,
+              Math.min(this.uncompletedWords[0].length, this.input.length)
+            ),
+          rest: this.uncompletedWords
+            .join(' ')
+            .slice(this.uncompletedWords[0].length, this.input.length),
+        },
+      };
+    }
   }
 }
