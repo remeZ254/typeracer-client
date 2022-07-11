@@ -1,11 +1,18 @@
-<main class="card" *ngIf="room$ | async as room">
-  <ng-container *ngIf="socketId$ | async as playerId">
-    <div class="countdown" *ngIf="room.countdown > 0">{{ room.countdown }}</div>
-    <app-track [room]="room" [playerId]="playerId"></app-track>
+<main
+  class="card"
+  *ngIf="{
+    room: room$ | async,
+    playerId: socketId$ | async,
+    countdown: countdown$ | async
+  } as o"
+>
+    <div class="countdown">
+      {{ o.countdown }}
+    </div>
+    <app-track [room]="o.room!" [playerId]="o.playerId!"></app-track>
     <app-race
-      [active]="room.status === RoomStatus.ACTIVE"
+      [active]="o.room!.status === RoomStatus.ACTIVE"
       [uncompletedWords]="uncompletedWords"
       (correctWord)="onCorrectWord($event)"
-    ></app-race
-  ></ng-container>
+    ></app-race>
 </main>
