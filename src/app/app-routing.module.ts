@@ -11,21 +11,29 @@ const routes: Routes = [
   {
     path: RoutesEnum.HOME,
     component: HomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: RoutesEnum.LOGIN,
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: RoutesEnum.ROOM,
-    component: RoomComponent
-  }
+    component: RoomComponent,
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: RoutesEnum.HOME,
+  },
+  {
+    path: '**',
+    redirectTo: RoutesEnum.HOME,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
