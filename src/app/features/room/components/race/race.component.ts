@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RoomStatus } from '@app/shared/models/room/room.model';
 
 interface QuoteDisplay {
   completed: {
@@ -21,7 +22,7 @@ interface QuoteDisplay {
   styleUrls: ['./race.component.scss'],
 })
 export class RaceComponent implements OnInit {
-  @Input() active!: boolean;
+  @Input() roomStatus!: RoomStatus;
   @Input() uncompletedWords!: string[];
   @Output() correctWord: EventEmitter<number>;
   input: string = '';
@@ -31,6 +32,7 @@ export class RaceComponent implements OnInit {
     valid: { inProgress: '', rest: '' },
     invalid: { inProgress: '', rest: '' },
   };
+  readonly RoomStatus = RoomStatus;
   private completedChars: string = '';
   private completedWords: string[] = [];
   private wordIndex: number = 0;
@@ -44,7 +46,7 @@ export class RaceComponent implements OnInit {
   }
 
   onInput() {
-    if (!this.active) return;
+    if (this.roomStatus === RoomStatus.QUEUED) return;
 
     const correctInput = this.uncompletedWords[0] + (this.uncompletedWords.length !== 1 ? ' ' : '');
 
@@ -70,7 +72,7 @@ export class RaceComponent implements OnInit {
         completed: { inProgress: '', rest: this.completedWords.join(' ') },
         valid: { inProgress: '', rest: '' },
         invalid: { inProgress: '', rest: '' },
-      }
+      };
     } else {
       this.quoteDisplay = {
         completed: {

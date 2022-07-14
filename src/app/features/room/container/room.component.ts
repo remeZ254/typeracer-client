@@ -18,7 +18,6 @@ export class RoomComponent {
   readonly socketId$: Observable<string>;
   readonly countdown$: Observable<string>;
   readonly room$: Observable<Room>;
-  readonly RoomStatus = RoomStatus;
 
   constructor(private store: Store<RoomState>, private router: Router) {
     this.socketId$ = this.store.pipe(select(getSocketId));

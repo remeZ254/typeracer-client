@@ -10,10 +10,11 @@
 
   <div class="input-container">
     <input
+      [appFocus]="roomStatus === RoomStatus.ACTIVE"
       type="text"
       class="input"
       spellcheck="false"
-      [disabled]="!active"
+      [disabled]="roomStatus === RoomStatus.QUEUED || uncompletedWords.length === 0"
       [class.error]="isInvalid"
       [(ngModel)]="input"
       (input)="onInput()"

@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RoomComponent } from './container/room.component';
+import { SharedModule } from '@app/shared/shared.module';
 import { RaceComponent } from './components/race/race.component';
 import { TrackComponent } from './components/track/track.component';
+import { RoomComponent } from './container/room.component';
 
 @NgModule({
   declarations: [RoomComponent, RaceComponent, TrackComponent],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
 })
 export class RoomModule {}

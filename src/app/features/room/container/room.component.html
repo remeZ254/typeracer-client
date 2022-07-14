@@ -11,7 +11,7 @@
     </div>
     <app-track [room]="o.room!" [playerId]="o.playerId!"></app-track>
     <app-race
-      [active]="o.room!.status === RoomStatus.ACTIVE"
+      [roomStatus]="o.room!.status"
       [uncompletedWords]="uncompletedWords"
       (correctWord)="onCorrectWord($event)"
     ></app-race>
