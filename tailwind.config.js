@@ -1,10 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  content: ['./src/**/*.{html,ts}'],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        cloud: {
+          '0%': { 'margin-left': '-1000px' },
+          '100%': { 'margin-left': '100%' },
+        },
+        shake: {
+          '25%': {transform: 'translate(4px)'},
+          '50%': {transform: 'translate(-4px)'},
+          '75%': {transform: 'translate(4px)'},
+        }
+      },
+    },
   },
   plugins: [],
-}
+};

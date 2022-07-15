@@ -23,24 +23,12 @@
     }
 
     &.shake {
-      animation: shake 300ms;
-
-      @keyframes shake {
-        25% {
-          transform: translate(4px);
-        }
-        50% {
-          transform: translate(-4px);
-        }
-        75% {
-          transform: translate(4px);
-        }
-      }
+      @apply animate-[shake_300ms];
     }
   }
 
   .button {
-    @apply bg-purple-600 hover:bg-purple-700;
+    @apply bg-blue-500 hover:bg-cyan-700;
     @apply font-bold text-white;
     @apply py-2;
     @apply rounded shadow-lg hover:shadow-xl;

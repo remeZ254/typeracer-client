@@ -15,12 +15,13 @@ import { LoginComponent } from './features/login/login.component';
 import { RoomModule } from './features/room/room.module';
 import { ConfigService } from './services/config.service';
 import { FooterComponent } from './features/footer/footer.component';
+import { BackgroundComponent } from './features/background/background.component';
 
 const initializeAppFactory = (configService: ConfigService) => () =>
   configService.initConfiguration();
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, FooterComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, FooterComponent, BackgroundComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
