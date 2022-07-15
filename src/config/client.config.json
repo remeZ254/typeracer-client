@@ -1,7 +1,4 @@
 {
-  "creator": {
-    "name": "Zemer",
-    "phone": "530-2525"
-  },
-  "authKey": "nickName"
+  "authKey": "nickName",
+  "footer": ["Zemer", "530-2525"]
 }

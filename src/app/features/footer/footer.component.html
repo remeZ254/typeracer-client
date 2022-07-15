@@ -1,5 +1,6 @@
 <footer class="footer">
-  <span class="footer-item">{{ creatorName }}</span>
-  <span class="footer-item">•</span>
-  <span class="footer-item">{{ creatorPhone }}</span>
+  <ng-container *ngFor="let item of items; let lastItem = last">
+    <span class="footer-item">{{ item }}</span>
+    <span class="footer-item" *ngIf="!lastItem">•</span>
+  </ng-container>
 </footer>
