@@ -1,5 +1,6 @@
 import { Environment } from './environment.model';
 
 export const devEnv: Environment = {
-  production: false
+  production: false,
+  configPath: 'config/client.config.json'
 };

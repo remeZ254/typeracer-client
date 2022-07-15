@@ -3,5 +3,6 @@ import { Environment } from './environment.model';
 
 export const environment: Environment = {
   ...devEnv,
-  production: true
+  production: true,
+  configPath: 'config',
 };

@@ -1,0 +1,9 @@
+.footer {
+  @apply flex justify-center;
+  @apply max-w-lg mx-auto;
+  @apply text-white;
+
+  .footer-item {
+    @apply mx-3;
+  }
+}

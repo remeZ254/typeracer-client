@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RoutesEnum } from '@app/shared/models/routes/routes.model';
-import { timer } from 'rxjs';
 
 import { AuthService } from '@app/core/auth/service/auth.service';
+import { RoutesEnum } from '@app/shared/models/routes/routes.model';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +14,6 @@ export class LoginComponent {
   auth: string = '';
   showError: boolean = false;
   shakeInput: boolean = false;
-  readonly creatorName: string = 'Zemer Hiyret';
-  readonly creatorNumber: string = '530-2525';
 
   constructor(private authService: AuthService, private router: Router) {}
 
