@@ -7,13 +7,16 @@
     @apply border-dashed border-amber-400 border-b-4;
 
     .racer {
+      $vehicle-width: 5rem;
+      $name-width: 7rem;
+
       @apply flex flex-row;
-      @apply max-h-14;
-      margin-left: calc((100% - 16rem) * var(--progress));
+      max-height: 5rem;
+      margin-left: calc((100% - ($name-width + $vehicle-width)) * var(--progress));
 
       .name-container {
-        @apply flex flex-col;
-        @apply w-28;
+        @apply flex flex-col justify-center;
+        width: $name-width;
 
         .name {
           @apply inline-block overflow-hidden whitespace-nowrap;
@@ -21,8 +24,9 @@
         }
       }
 
-      .car {
-        @apply w-36;
+      .vehicle {
+        @apply pl-2;
+        width: $vehicle-width;
       }
     }
   }

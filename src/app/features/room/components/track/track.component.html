@@ -6,9 +6,9 @@
     >
       <div class="name-container">
         <div class="name">{{ player.nickName }}</div>
-        <div class="name" *ngIf='player.socketId === playerId'>(you)</div>
+        <div class="name" *ngIf="player.socketId === playerId">(you)</div>
       </div>
-      <img class="car" src="assets/svg/cars/car.svg" alt="car" />
+      <img class="vehicle" [src]="getTrackIcon(player.track)" alt="adir" />
     </div>
   </div>
   <div class="score">

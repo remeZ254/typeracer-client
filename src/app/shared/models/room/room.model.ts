@@ -1,3 +1,5 @@
+import { AirTracks } from '@app/shared/models/airtracks/airtracks.model';
+
 export interface Room {
   id: string;
   status: RoomStatus;
@@ -17,6 +19,7 @@ export interface Player {
   nickName: string;
   wordIndex: number;
   wpm: number;
+  track: AirTracks;
 }
 
 export interface Quote {

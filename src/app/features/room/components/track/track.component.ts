@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { getTrackIcon } from '@app/shared/models/airtracks/airtracks.model';
 import { Room } from '@app/shared/models/room/room.model';
 
 @Component({
@@ -9,4 +10,5 @@ import { Room } from '@app/shared/models/room/room.model';
 export class TrackComponent {
   @Input() playerId!: string;
   @Input() room!: Room;
+  readonly getTrackIcon = getTrackIcon;
 }
