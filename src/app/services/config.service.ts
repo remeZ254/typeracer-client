@@ -13,7 +13,7 @@ export class ConfigService {
   }
 
   initConfiguration(): Observable<any> {
-    const config = this.http.get(environment.configPath);
+    const config = this.http.get(environment.configUrl);
     config.subscribe(this.config$);
     return config;
   }

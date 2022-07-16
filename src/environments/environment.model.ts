@@ -1,4 +1,4 @@
 export interface Environment {
   production: boolean;
-  configPath: string;
+  configUrl: string;
 }

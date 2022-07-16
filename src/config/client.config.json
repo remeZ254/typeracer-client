@@ -1,4 +1,5 @@
 {
   "authKey": "nickName",
-  "footer": ["Zemer", "530-2525"]
+  "footer": ["Zemer", "530-2525"],
+  "socketUrl": "localhost:3000"
 }
