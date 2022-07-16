@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { sendPlayerUpdate } from '@app/core/room/actions/room.actions';
 import { select, Store } from '@ngrx/store';
 import { first, map, Observable } from 'rxjs';
 
+import { sendPlayerUpdate } from '@app/core/room/actions/room.actions';
 import { getRoom, getSocketId, RoomState } from '@app/core/room/reducers/room.reducer';
 import { Room, RoomStatus } from '@app/shared/models/room/room.model';
 import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 
 @Component({
-  selector: 'app-room',
-  templateUrl: './room.component.html',
-  styleUrls: ['./room.component.scss'],
+  selector: 'app-public-room',
+  templateUrl: './public-room.component.html',
+  styleUrls: ['./public-room.component.scss'],
 })
-export class RoomComponent {
+export class PublicRoomComponent {
   uncompletedWords: string[] = [];
   readonly socketId$: Observable<string>;
   readonly countdown$: Observable<string>;

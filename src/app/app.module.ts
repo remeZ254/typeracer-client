@@ -9,29 +9,29 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { ConfigService } from './services/config.service';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { RoomModule } from './features/room/room.module';
-import { ConfigService } from './services/config.service';
-import { FooterComponent } from './features/footer/footer.component';
-import { BackgroundComponent } from './features/background/background.component';
 
 const initializeAppFactory = (configService: ConfigService) => () =>
   configService.initConfiguration();
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, FooterComponent, BackgroundComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    FormsModule,
     CoreModule,
-    StoreModule.forRoot({}),
+    FormsModule,
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    RoomModule,
     HttpClientModule,
+    RoomModule,
+    SharedModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({})
   ],
   providers: [
     ConfigService,

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { RoutesEnum } from '@app/shared/models/routes/routes.model';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { first, map, mergeMap, switchMap, tap } from 'rxjs';
-import { getRoomAuth, getRoomId, RoomState } from '@app/core/room/reducers/room.reducer';
-import { Room } from '@app/shared/models/room/room.model';
+
 import {
   connectedToSubscription,
   connectToSubscription,
@@ -13,7 +11,10 @@ import {
   newRoomMessage,
   sendPlayerUpdate,
 } from '../actions/room.actions';
+import { getRoomAuth, RoomState } from '../reducers/room.reducer';
 import { RoomService } from '../services/room.service';
+import { Room } from '@app/shared/models/room/room.model';
+import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 
 // noinspection JSUnusedLocalSymbols
 @Injectable()
@@ -48,9 +49,8 @@ export class RoomEffect {
     () =>
       this.actions$.pipe(
         ofType(newRoomMessage),
-        switchMap(() => this.store.pipe(select(getRoomId))),
         first(),
-        tap((id: string) => this.router.navigate([RoutesEnum.ROOM.replace(':id', id)]))
+        tap(() => this.router.navigate([RoutesEnum.ROOM]))
       ),
     { dispatch: false }
   );
