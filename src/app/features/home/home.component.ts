@@ -20,4 +20,6 @@ export class HomeComponent {
   enterRace() {
     this.store.dispatch(connectToSubscription());
   }
+
+  enterPractice() {}
 }

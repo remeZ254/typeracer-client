@@ -4,12 +4,13 @@ export const roomMock: Room = {
   id: '6c6c4ba4-f55d-4a3b-b48f-7712a83e76b7',
   status: RoomStatus.QUEUED,
   players: [
-    { socketId: 'elZDsf3dieqeGgsfAAA3', nickName: 'Guest', wordIndex: 0, wpm: 0 },
+    { socketId: 'elZDsf3dieqeGgsfAAA3', nickName: 'Guest', wordIndex: 0, wpm: 0, track: 'shoval' },
     {
       socketId: 'nKq6kK31AKCqt53pAABP',
       nickName: 'itypeforbyron',
       wordIndex: 26,
       wpm: 80,
+      track: 'eitan',
     },
   ],
   text: {
@@ -24,5 +25,5 @@ export const roomMock: Room = {
     author: 'zemer',
     category: 'mocks',
   },
-  countdown: 33
+  countdown: 33,
 };
