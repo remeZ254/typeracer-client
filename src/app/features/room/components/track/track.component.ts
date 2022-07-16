@@ -7,8 +7,8 @@ import { Room } from '@app/shared/models/room/room.model';
   styleUrls: ['./track.component.scss'],
 })
 export class TrackComponent {
-  @Input() playerId!: string;
-  @Input() room!: Room;
+  @Input() playerId: string;
+  @Input() room: Room;
 
   getTrackIcon(airTrack: string): string {
     return `assets/svg/airtracks/${airTrack}.svg`;

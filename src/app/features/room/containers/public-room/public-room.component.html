@@ -9,9 +9,9 @@
   <div class="countdown">
     {{ o.countdown }}
   </div>
-  <app-track [room]="o.room!" [playerId]="o.playerId!"></app-track>
+  <app-track [room]="o.room" [playerId]="o.playerId"></app-track>
   <app-race
-    [roomStatus]="o.room!.status"
+    [roomStatus]="o.room.status"
     [uncompletedWords]="uncompletedWords"
     (correctWord)="onCorrectWord($event)"
   ></app-race>

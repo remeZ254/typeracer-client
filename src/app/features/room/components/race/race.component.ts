@@ -22,8 +22,8 @@ interface QuoteDisplay {
   styleUrls: ['./race.component.scss'],
 })
 export class RaceComponent implements OnInit {
-  @Input() roomStatus!: RoomStatus;
-  @Input() uncompletedWords!: string[];
+  @Input() roomStatus: RoomStatus;
+  @Input() uncompletedWords: string[];
   @Output() correctWord: EventEmitter<number>;
   input: string = '';
   isInvalid: boolean = false;
