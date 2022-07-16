@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RoomState } from '@app/core/room/reducers/room.reducer';
 import { ConfigService } from '@app/services/config.service';
 import { RoomModes } from '@app/shared/models/room/room.model';
+import { environment } from '@environments/environment';
 import { Store } from '@ngrx/store';
 
 import {
@@ -9,20 +10,23 @@ import {
   disconnectedFromSubscription,
 } from '@app/core/room/actions/room.actions';
 import { Observable, Observer } from 'rxjs';
-import { io, Socket } from 'socket.io-client';
+import { Socket, connect } from 'socket.io-client';
 
 @Injectable()
 export class RoomSubscriptionService {
   private socket: Socket;
   defaultEvent = 'room';
 
-  constructor(private store: Store<RoomState>,private configService:ConfigService) {}
+  constructor(private store: Store<RoomState>, private configService: ConfigService) {}
 
   connect(mode: RoomModes) {
     if (!this.socket || !this.socket.connected) {
-      this.socket = io(this.configService.get('socketUrl'), {
-        transports: ['websocket'],
-      });
+      this.socket = connect(
+        environment.production ? window.location.host : this.configService.get('socketUrl'),
+        {
+          transports: ['websocket'],
+        }
+      );
     }
 
     this.socket.on('connect', () =>
