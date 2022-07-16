@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { NavigationStart, Router } from '@angular/router';
+import { Room } from '@app/shared/models/room/room.model';
+import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { first, map, mergeMap, switchMap, tap } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { filter, first, map, mergeMap, switchMap, tap } from 'rxjs';
 
 import {
   connectedToSubscription,
@@ -13,8 +15,6 @@ import {
 } from '../actions/room.actions';
 import { getRoomAuth, RoomState } from '../reducers/room.reducer';
 import { RoomService } from '../services/room.service';
-import { Room } from '@app/shared/models/room/room.model';
-import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 
 // noinspection JSUnusedLocalSymbols
 @Injectable()
@@ -45,14 +45,18 @@ export class RoomEffect {
     )
   );
 
-  private readonly onFirstRoomMessage$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(newRoomMessage),
-        first(),
-        tap(() => this.router.navigate([RoutesEnum.ROOM]))
-      ),
-    { dispatch: false }
+  private readonly onFirstRoomMessage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(newRoomMessage),
+      first(),
+      tap(() => this.router.navigate([RoutesEnum.ROOM])),
+      switchMap(() =>
+        this.router.events.pipe(
+          filter((event) => event instanceof NavigationStart),
+          map(() => disconnectFromSubscription())
+        )
+      )
+    )
   );
 
   private readonly sendPlayerUpdate$ = createEffect(

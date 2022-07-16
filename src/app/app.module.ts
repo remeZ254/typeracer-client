@@ -30,8 +30,8 @@ const initializeAppFactory = (configService: ConfigService) => () =>
     HttpClientModule,
     RoomModule,
     SharedModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     ConfigService,
