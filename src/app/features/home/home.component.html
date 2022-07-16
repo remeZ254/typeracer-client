@@ -1,5 +1,5 @@
 <main class="card">
   <div class="card-header">Welcome {{ auth }}</div>
-  <button class="button" (click)="enterRace()">Enter a race</button>
-  <button class="button" (click)="enterPractice()">Practice</button>
+  <button class="button" (click)="enterRace(RoomModes.PUBLIC)">Enter a race</button>
+  <button class="button" (click)="enterRace(RoomModes.PRACTICE)">Practice</button>
 </main>

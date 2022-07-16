@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RoomState } from '@app/core/room/reducers/room.reducer';
+import { RoomModes } from '@app/shared/models/room/room.model';
 import { Store } from '@ngrx/store';
 
 import {
@@ -16,7 +17,7 @@ export class RoomSubscriptionService {
 
   constructor(private store: Store<RoomState>) {}
 
-  connect() {
+  connect(mode: RoomModes) {
     if (!this.socket || !this.socket.connected) {
       this.socket = io('localhost:3000', {
         transports: ['websocket'],
@@ -24,7 +25,7 @@ export class RoomSubscriptionService {
     }
 
     this.socket.on('connect', () =>
-      this.store.dispatch(connectedToSubscription({ socketId: this.socket.id }))
+      this.store.dispatch(connectedToSubscription({ socketId: this.socket.id, mode }))
     );
     this.socket.on('disconnect', () => this.store.dispatch(disconnectedFromSubscription()));
   }

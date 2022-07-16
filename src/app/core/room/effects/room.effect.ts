@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { Room } from '@app/shared/models/room/room.model';
+import { Room, RoomModes } from '@app/shared/models/room/room.model';
 import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
@@ -23,7 +23,7 @@ export class RoomEffect {
     () =>
       this.actions$.pipe(
         ofType(connectToSubscription),
-        tap(() => this.subscriptionService.connect())
+        tap(({ mode }) => this.subscriptionService.connect(mode))
       ),
     { dispatch: false }
   );
@@ -40,6 +40,7 @@ export class RoomEffect {
   private readonly onRoomMessages$ = createEffect(() =>
     this.actions$.pipe(
       ofType(connectedToSubscription),
+      tap(({ mode }) => this.subscriptionService.sendMessage<RoomModes>('joinRoom', mode)),
       mergeMap(() => this.subscriptionService.eventMessages$<Room>()),
       map((room: Room) => newRoomMessage({ room }))
     )

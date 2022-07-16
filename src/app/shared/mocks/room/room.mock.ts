@@ -1,4 +1,4 @@
-import { Room, RoomStatus } from '@app/shared/models/room/room.model';
+import { Room, RoomModes, RoomStatus } from '@app/shared/models/room/room.model';
 
 export const roomMock: Room = {
   id: '6c6c4ba4-f55d-4a3b-b48f-7712a83e76b7',
@@ -26,4 +26,5 @@ export const roomMock: Room = {
     category: 'mocks',
   },
   countdown: 33,
+  mode: RoomModes.PRACTICE,
 };

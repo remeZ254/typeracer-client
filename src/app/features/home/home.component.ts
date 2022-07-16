@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 import { AuthService } from '@app/core/auth/service/auth.service';
 import { connectToSubscription } from '@app/core/room/actions/room.actions';
 import { RoomState } from '@app/core/room/reducers/room.reducer';
+import { RoomModes } from '@app/shared/models/room/room.model';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +13,13 @@ import { RoomState } from '@app/core/room/reducers/room.reducer';
 })
 export class HomeComponent {
   readonly auth: string;
+  readonly RoomModes = RoomModes;
 
   constructor(private authService: AuthService, private store: Store<RoomState>) {
     this.auth = authService.getAuth();
   }
 
-  enterRace() {
-    this.store.dispatch(connectToSubscription());
+  enterRace(mode: RoomModes) {
+    this.store.dispatch(connectToSubscription({ mode }));
   }
-
-  enterPractice() {}
 }

@@ -1,4 +1,4 @@
-import { Room } from '@app/shared/models/room/room.model';
+import { Room, RoomModes } from '@app/shared/models/room/room.model';
 import { createAction, props } from '@ngrx/store';
 
 enum RoomActions {
@@ -10,10 +10,13 @@ enum RoomActions {
   SEND_PLAYER_UPDATE = '[Room] Send Player Update',
 }
 
-export const connectToSubscription = createAction(RoomActions.CONNECT);
+export const connectToSubscription = createAction(
+  RoomActions.CONNECT,
+  props<{ mode: RoomModes }>()
+);
 export const connectedToSubscription = createAction(
   RoomActions.CONNECTED,
-  props<{ socketId: string }>()
+  props<{ socketId: string; mode: RoomModes }>()
 );
 export const disconnectFromSubscription = createAction(RoomActions.DISCONNECT);
 export const disconnectedFromSubscription = createAction(RoomActions.DISCONNECTED);

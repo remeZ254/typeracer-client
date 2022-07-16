@@ -3,7 +3,7 @@ import {
   disconnectedFromSubscription,
   newRoomMessage,
 } from '@app/core/room/actions/room.actions';
-import { Room, RoomStatus } from '@app/shared/models/room/room.model';
+import { Room, RoomModes, RoomStatus } from '@app/shared/models/room/room.model';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 export const ROOM_STATE_TOKEN = 'room';
@@ -32,6 +32,7 @@ export const roomInitialState: RoomState = {
       category: '',
     },
     countdown: -1,
+    mode: RoomModes.PRACTICE,
   },
 };
 

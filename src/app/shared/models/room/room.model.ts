@@ -4,6 +4,12 @@ export interface Room {
   players: Player[];
   text: Quote;
   countdown: number;
+  mode: RoomModes;
+}
+
+export enum RoomModes {
+  PUBLIC = 'PUBLIC',
+  PRACTICE = 'PRACTICE',
 }
 
 export enum RoomStatus {

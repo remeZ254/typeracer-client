@@ -1,18 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PracticeRoomComponent } from './containers/practice-room/practice-room.component';
-import { PublicRoomComponent } from './containers/public-room/public-room.component';
+import { RoomComponent } from './containers/room.component';
 
-const routes: Routes = [
-  {
-    path: 'practice',
-    component: PracticeRoomComponent,
-  },
-  {
-    path: '',
-    component: PublicRoomComponent,
-  },
-];
+const routes: Routes = [{ path: '', component: RoomComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
