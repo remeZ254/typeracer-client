@@ -47,13 +47,18 @@ export class RoomEffect {
 
   private readonly onFirstRoomMessage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(newRoomMessage),
-      first(),
-      tap(() => this.router.navigate([RoutesEnum.ROOM])),
+      ofType(connectedToSubscription),
       switchMap(() =>
-        this.router.events.pipe(
-          filter((event) => event instanceof NavigationStart),
-          map(() => disconnectFromSubscription())
+        this.actions$.pipe(
+          ofType(newRoomMessage),
+          first(),
+          tap(() => this.router.navigate([RoutesEnum.ROOM])),
+          switchMap(() =>
+            this.router.events.pipe(
+              filter((event) => event instanceof NavigationStart),
+              map(() => disconnectFromSubscription())
+            )
+          )
         )
       )
     )

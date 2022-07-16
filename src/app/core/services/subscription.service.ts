@@ -15,7 +15,7 @@ export abstract class SubscriptionService {
   protected constructor(private store: Store<any>) {}
 
   connect() {
-    if (!this.socket) {
+    if (!this.socket || !this.socket.connected) {
       this.socket = io('localhost:3000', {
         transports: ['websocket'],
       });

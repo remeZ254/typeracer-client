@@ -1,10 +1,10 @@
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import {
   connectedToSubscription,
   disconnectedFromSubscription,
   newRoomMessage,
 } from '@app/core/room/actions/room.actions';
 import { Room, RoomStatus } from '@app/shared/models/room/room.model';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 export const ROOM_STATE_TOKEN = 'room';
 
@@ -45,14 +45,7 @@ export const roomReducer = createReducer(
       socketId,
     })
   ),
-  on(
-    disconnectedFromSubscription,
-    (state: RoomState): RoomState => ({
-      ...state,
-      subscriptionStatus: SubscriptionStatus.DISCONNECTED,
-      socketId: '',
-    })
-  ),
+  on(disconnectedFromSubscription, (): RoomState => roomInitialState),
   on(
     newRoomMessage,
     (state: RoomState, { room }: { room: Room }): RoomState => ({
