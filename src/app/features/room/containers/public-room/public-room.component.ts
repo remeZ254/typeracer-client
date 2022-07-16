@@ -11,7 +11,7 @@ import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 @Component({
   selector: 'app-public-room',
   templateUrl: './public-room.component.html',
-  styleUrls: ['./public-room.component.scss'],
+  styleUrls: ['../styles/room.component.scss'],
 })
 export class PublicRoomComponent {
   uncompletedWords: string[] = [];
