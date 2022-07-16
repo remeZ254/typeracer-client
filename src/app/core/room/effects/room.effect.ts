@@ -14,7 +14,7 @@ import {
   sendPlayerUpdate,
 } from '../actions/room.actions';
 import { getRoomAuth, RoomState } from '../reducers/room.reducer';
-import { RoomService } from '../services/room.service';
+import { RoomSubscriptionService } from '../services/room-subscription.service';
 
 // noinspection JSUnusedLocalSymbols
 @Injectable()
@@ -23,7 +23,7 @@ export class RoomEffect {
     () =>
       this.actions$.pipe(
         ofType(connectToSubscription),
-        tap(() => this.roomService.connect())
+        tap(() => this.subscriptionService.connect())
       ),
     { dispatch: false }
   );
@@ -32,7 +32,7 @@ export class RoomEffect {
     () =>
       this.actions$.pipe(
         ofType(disconnectFromSubscription),
-        tap(() => this.roomService.disconnect())
+        tap(() => this.subscriptionService.disconnect())
       ),
     { dispatch: false }
   );
@@ -40,7 +40,7 @@ export class RoomEffect {
   private readonly onRoomMessages$ = createEffect(() =>
     this.actions$.pipe(
       ofType(connectedToSubscription),
-      mergeMap(() => this.roomService.eventMessages$<Room>()),
+      mergeMap(() => this.subscriptionService.eventMessages$<Room>()),
       map((room: Room) => newRoomMessage({ room }))
     )
   );
@@ -56,6 +56,7 @@ export class RoomEffect {
           switchMap(() =>
             this.router.events.pipe(
               filter((event) => event instanceof NavigationStart),
+              first(),
               map(() => disconnectFromSubscription())
             )
           )
@@ -72,7 +73,7 @@ export class RoomEffect {
           this.store.pipe(
             select(getRoomAuth),
             tap(({ socketId, roomId }) =>
-              this.roomService.sendMessage('playerUpdate', { wordIndex, roomId, socketId })
+              this.subscriptionService.sendMessage('playerUpdate', { wordIndex, roomId, socketId })
             )
           )
         )
@@ -82,7 +83,7 @@ export class RoomEffect {
 
   constructor(
     private actions$: Actions,
-    private roomService: RoomService,
+    private subscriptionService: RoomSubscriptionService,
     private store: Store<RoomState>,
     private router: Router
   ) {}

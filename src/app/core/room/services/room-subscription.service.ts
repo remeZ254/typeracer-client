@@ -1,18 +1,20 @@
-import { ActionCreator, Store } from '@ngrx/store';
-import { TypedAction } from '@ngrx/store/src/models';
+import { Injectable } from '@angular/core';
+import { RoomState } from '@app/core/room/reducers/room.reducer';
+import { Store } from '@ngrx/store';
+
+import {
+  connectedToSubscription,
+  disconnectedFromSubscription,
+} from '@app/core/room/actions/room.actions';
 import { Observable, Observer } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
-export abstract class SubscriptionService {
+@Injectable()
+export class RoomSubscriptionService {
   private socket: Socket | undefined;
-  abstract defaultEvent: string;
-  abstract connectedToSubscription: ActionCreator<
-    any,
-    (props: { socketId: string }) => { socketId: string } & TypedAction<any>
-  >;
-  abstract disconnectedFromSubscription: ActionCreator<any, () => TypedAction<any>>;
+  defaultEvent = 'room';
 
-  protected constructor(private store: Store<any>) {}
+  constructor(private store: Store<RoomState>) {}
 
   connect() {
     if (!this.socket || !this.socket.connected) {
@@ -22,9 +24,9 @@ export abstract class SubscriptionService {
     }
 
     this.socket.on('connect', () =>
-      this.store.dispatch(this.connectedToSubscription({ socketId: this.socket!.id }))
+      this.store.dispatch(connectedToSubscription({ socketId: this.socket!.id }))
     );
-    this.socket.on('disconnect', () => this.store.dispatch(this.disconnectedFromSubscription()));
+    this.socket.on('disconnect', () => this.store.dispatch(disconnectedFromSubscription()));
   }
 
   disconnect() {

@@ -3,7 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { RoomEffect } from './effects/room.effect';
-import { RoomService } from '@app/core/room/services/room.service';
+import { RoomSubscriptionService } from '@app/core/room/services/room-subscription.service';
 import { ROOM_STATE_TOKEN, roomReducer } from './reducers/room.reducer';
 
 @NgModule({
@@ -11,6 +11,6 @@ import { ROOM_STATE_TOKEN, roomReducer } from './reducers/room.reducer';
     StoreModule.forFeature(ROOM_STATE_TOKEN, roomReducer),
     EffectsModule.forFeature([RoomEffect]),
   ],
-  providers: [RoomService],
+  providers: [RoomSubscriptionService],
 })
 export class RoomModule {}
