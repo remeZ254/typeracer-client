@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { AuthService } from '@app/core/auth/service/auth.service';
 import { connectToSubscription } from '@app/core/room/actions/room.actions';
@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {
   readonly auth: string;
