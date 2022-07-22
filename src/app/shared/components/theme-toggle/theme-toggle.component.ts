@@ -1,12 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Themes } from '@app/shared/models/themes/themes.enum';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
-
-enum Themes {
-  BRIGHT = 'BRIGHT',
-  DARK = 'DARK',
-}
 
 @Component({
   selector: 'app-theme-toggle',
@@ -15,11 +11,13 @@ enum Themes {
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeToggleComponent implements OnInit {
+  @Output() readonly themeChanged: EventEmitter<Themes>;
   readonly icon$: BehaviorSubject<IconDefinition>;
   private theme: Themes;
 
   constructor() {
     this.icon$ = new BehaviorSubject<IconDefinition>(this.getIconFromTheme(Themes.BRIGHT));
+    this.themeChanged = new EventEmitter<Themes>();
   }
 
   ngOnInit() {
@@ -46,6 +44,7 @@ export class ThemeToggleComponent implements OnInit {
 
     window.localStorage.setItem('theme', this.theme);
     this.icon$.next(this.getIconFromTheme(this.theme));
+    this.themeChanged.emit(this.theme);
   }
 
   private getIconFromTheme(theme: Themes): IconDefinition {

@@ -23,27 +23,11 @@
   }
 }
 
-.cloud-container-1 {
-  @apply animate-[cloud_35s_linear_infinite];
-  transform: scale(0.65);
+.star {
+  @apply inline-block absolute bg-white rounded-full;
+  @apply animate-[star_1s_linear_infinite];
 }
 
-.cloud-container-2 {
-  @apply animate-[cloud_20s_linear_infinite];
-  transform: scale(0.3);
-}
-
-.cloud-container-3 {
-  @apply animate-[cloud_30s_linear_infinite];
-  transform: scale(0.5);
-}
-
-.cloud-container-4 {
-  @apply animate-[cloud_18s_linear_infinite];
-  transform: scale(0.4);
-}
-
-.cloud-container-5 {
-  @apply animate-[cloud_25s_linear_infinite];
-  transform: scale(0.55);
+.cloud-container {
+  @apply animate-[cloud_1s_linear_infinite];
 }

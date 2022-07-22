@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 <ng-container>
-  <app-background></app-background>
-  <app-theme-toggle></app-theme-toggle>
+  <app-background [theme]="theme"></app-background>
+  <app-theme-toggle (themeChanged)="onThemeChange($event)"></app-theme-toggle>
   <app-footer></app-footer>
 </ng-container>

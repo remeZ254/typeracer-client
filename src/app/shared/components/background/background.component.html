@@ -1,7 +1,14 @@
-<div class="background-container">
-  <div *ngFor="let i of clouds()">
-    <div [class]="'cloud-container-' + i">
-      <div class="cloud"></div>
+<div class="background-container" [ngSwitch]="theme">
+  <ng-template [ngSwitchCase]="Themes.BRIGHT">
+    <div *ngFor="let style of clouds(5)">
+      <div class="cloud-container" [style]="style">
+        <div class="cloud"></div>
+      </div>
     </div>
-  </div>
+  </ng-template>
+  <ng-template [ngSwitchCase]="Themes.DARK">
+    <div *ngFor="let style of stars(200)">
+      <div class="star" [style]="style"></div>
+    </div>
+  </ng-template>
 </div>
