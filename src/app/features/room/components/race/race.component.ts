@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { RoomStatus } from '@app/shared/models/room/room.model';
 
 interface QuoteDisplay {
@@ -20,6 +20,7 @@ interface QuoteDisplay {
   selector: 'app-race',
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RaceComponent implements OnInit {
   @Input() roomStatus: RoomStatus;

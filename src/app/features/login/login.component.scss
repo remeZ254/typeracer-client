@@ -1,36 +1,21 @@
-.card {
-  @apply flex flex-col;
-  @apply max-w-lg mx-auto my-10 p-8;
-  @apply bg-white rounded-lg shadow-2xl;
-  @apply dark:bg-gray-700 dark:text-white;
+@import '../../styles/card.scss';
+
+.card-header {
+  @apply font-bold text-2xl;
+}
+
+.login-input {
+  @apply w-full my-6 p-3;
+  @apply border-gray-300 border-b-4 rounded focus:border-blue-500;
+  @apply bg-gray-200 text-gray-700 focus:outline-none;
   @apply transition duration-500;
+  @apply dark:bg-gray-300 dark:border-gray-400 dark:text-gray-800 dark:focus:border-cyan-700;
 
-  .card-header {
-    @apply font-bold text-2xl;
+  &.error {
+    @apply border-red-500 focus:border-red-500;
   }
 
-  .input {
-    @apply w-full my-6 p-3;
-    @apply border-gray-300 border-b-4 rounded focus:border-blue-500;
-    @apply bg-gray-200 text-gray-700 focus:outline-none;
-    @apply transition duration-500;
-    @apply dark:bg-gray-300 dark:border-gray-400 dark:text-gray-800 dark:focus:border-cyan-700;
-
-    &.error {
-      @apply border-red-500 focus:border-red-500;
-    }
-
-    &.shake {
-      @apply animate-[shake_300ms];
-    }
-  }
-
-  .button {
-    @apply bg-blue-500 hover:bg-cyan-700;
-    @apply dark:bg-cyan-700 dark:hover:bg-blue-500;
-    @apply font-bold text-white;
-    @apply py-2;
-    @apply rounded shadow-lg hover:shadow-xl;
-    @apply transition duration-200;
+  &.shake {
+    @apply animate-[shake_300ms];
   }
 }

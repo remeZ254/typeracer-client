@@ -1,6 +1,6 @@
 .player {
   @apply flex flex-row;
-  @apply text-slate-600 font-bold;
+  @apply text-slate-600 font-bold dark:text-slate-300;
 
   .track {
     @apply w-5/6 p-1;

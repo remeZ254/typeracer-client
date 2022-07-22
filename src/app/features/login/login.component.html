@@ -2,10 +2,10 @@
   <div class="card-header">Choose a nickname</div>
   <input
     type="text"
-    class="input"
+    class="login-input"
     [class.error]="showError"
     [class.shake]="shakeInput"
     (input)="onInput($event)"
   />
-  <button class="button" (click)="login()">Continue</button>
+  <button class="card-button" (click)="login()">Continue</button>
 </main>

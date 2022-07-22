@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { sendPlayerUpdate } from '@app/core/room/actions/room.actions';
@@ -12,6 +12,7 @@ import { first, map, Observable } from 'rxjs';
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RoomComponent {
   uncompletedWords: string[] = [];

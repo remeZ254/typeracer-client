@@ -8,16 +8,14 @@
     <span>{{ quoteDisplay.valid.rest }}</span>
   </div>
 
-  <div class="input-container">
-    <input
-      [appFocus]="roomStatus === RoomStatus.ACTIVE"
-      type="text"
-      class="input"
-      spellcheck="false"
-      [disabled]="roomStatus === RoomStatus.QUEUED || uncompletedWords.length === 0"
-      [class.error]="isInvalid"
-      [(ngModel)]="input"
-      (input)="onInput()"
-    />
-  </div>
+  <input
+    [appFocus]="roomStatus === RoomStatus.ACTIVE"
+    type="text"
+    class="race-input"
+    spellcheck="false"
+    [disabled]="roomStatus === RoomStatus.QUEUED || uncompletedWords.length === 0"
+    [class.error]="isInvalid"
+    [(ngModel)]="input"
+    (input)="onInput()"
+  />
 </div>
