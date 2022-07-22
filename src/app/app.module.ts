@@ -15,6 +15,7 @@ import { ConfigService } from './services/config.service';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { RoomModule } from './features/room/room.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const initializeAppFactory = (configService: ConfigService) => () =>
   configService.initConfiguration();
@@ -31,7 +32,8 @@ const initializeAppFactory = (configService: ConfigService) => () =>
     RoomModule,
     SharedModule,
     StoreModule.forRoot({}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    FontAwesomeModule
   ],
   providers: [
     ConfigService,

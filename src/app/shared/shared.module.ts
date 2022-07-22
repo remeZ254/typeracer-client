@@ -1,23 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core'
   ;
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FocusDirective } from './directives/focus.directive';
 import { BackgroundComponent } from './components/background/background.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { FocusDirective } from './directives/focus.directive';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 @NgModule({
   declarations: [
     BackgroundComponent,
     FocusDirective,
-    FooterComponent
+    FooterComponent,
+    ThemeToggleComponent
   ],
   exports: [
     BackgroundComponent,
     FocusDirective,
-    FooterComponent
+    FooterComponent,
+    ThemeToggleComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ]
 })
 export class SharedModule {}
