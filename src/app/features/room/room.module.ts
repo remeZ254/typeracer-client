@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 import { RaceComponent } from './components/race/race.component';
 import { TrackComponent } from './components/track/track.component';
-import { RoomComponent } from './containers/room.component';
+import { RoomComponent } from './container/room.component';
 import { RoomRoutingModule } from './room-routing.module';
 
 @NgModule({

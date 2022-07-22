@@ -1,7 +1,7 @@
-.footer {
-  @apply fixed bottom-0 w-full py-6;
+app-theme-toggle {
+  @apply fixed top-0 left-0 p-6;
 }
 
-.theme-toggle {
-  @apply fixed top-0 left-0 p-6;
+app-footer {
+  @apply fixed bottom-0 w-full py-6;
 }
