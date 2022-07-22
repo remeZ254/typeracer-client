@@ -1,21 +1,7 @@
 <div class="background-container">
-  <div class="cloud-container-1">
-    <div class="cloud"></div>
-  </div>
-
-  <div class="cloud-container-2">
-    <div class="cloud"></div>
-  </div>
-
-  <div class="cloud-container-3">
-    <div class="cloud"></div>
-  </div>
-
-  <div class="cloud-container-4">
-    <div class="cloud"></div>
-  </div>
-
-  <div class="cloud-container-5">
-    <div class="cloud"></div>
+  <div *ngFor="let i of clouds()">
+    <div [class]="'cloud-container-' + i">
+      <div class="cloud"></div>
+    </div>
   </div>
 </div>
