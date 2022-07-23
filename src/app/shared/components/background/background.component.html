@@ -1,4 +1,4 @@
-<div class="background-container" [ngSwitch]="theme">
+<div class="background-container" *ngIf='theme$ | async as theme' [ngSwitch]="theme">
   <ng-template [ngSwitchCase]="Themes.BRIGHT">
     <div *ngFor="let style of clouds(5)">
       <div class="cloud-container" [style]="style">

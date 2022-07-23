@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { getTheme } from '@app/core/theme/reducers/theme.reducer';
 import { Themes } from '@app/shared/models/themes/themes.enum';
+import { select, Store } from '@ngrx/store';
 import { random } from 'lodash';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-background',
@@ -9,8 +12,12 @@ import { random } from 'lodash';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackgroundComponent {
-  @Input() theme: Themes;
+  readonly theme$: Observable<Themes>;
   readonly Themes = Themes;
+
+  constructor(private store: Store) {
+    this.theme$ = this.store.pipe(select(getTheme));
+  }
 
   clouds(length: number) {
     return Array.from({ length }, () => ({

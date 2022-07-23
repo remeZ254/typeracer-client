@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-
-import { RoomModule } from './room/room.module';
+import { ThemeModule } from './theme/theme.module';
 import { AuthModule } from './auth/auth.module';
+import { RoomModule } from './room/room.module';
 
 @NgModule({
-  imports: [AuthModule, RoomModule],
+  imports: [AuthModule, RoomModule, ThemeModule],
 })
 export class CoreModule {}

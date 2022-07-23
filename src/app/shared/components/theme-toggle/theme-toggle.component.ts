@@ -1,23 +1,24 @@
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { changeTheme } from '@app/core/theme/actions/theme.actions';
 import { Themes } from '@app/shared/models/themes/themes.enum';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-theme-toggle',
   templateUrl: './theme-toggle.component.html',
   styleUrls: ['./theme-toggle.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeToggleComponent implements OnInit {
-  @Output() readonly themeChanged: EventEmitter<Themes>;
   readonly icon$: BehaviorSubject<IconDefinition>;
   private theme: Themes;
 
-  constructor() {
+  constructor(private store: Store) {
     this.icon$ = new BehaviorSubject<IconDefinition>(this.getIconFromTheme(Themes.BRIGHT));
-    this.themeChanged = new EventEmitter<Themes>();
   }
 
   ngOnInit() {
@@ -44,7 +45,7 @@ export class ThemeToggleComponent implements OnInit {
 
     window.localStorage.setItem('theme', this.theme);
     this.icon$.next(this.getIconFromTheme(this.theme));
-    this.themeChanged.emit(this.theme);
+    this.store.dispatch(changeTheme({ theme: this.theme }));
   }
 
   private getIconFromTheme(theme: Themes): IconDefinition {
