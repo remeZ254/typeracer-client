@@ -1,5 +1,6 @@
 import {
   connectedToSubscription,
+  connectingToSubscription,
   disconnectedFromSubscription,
   newRoomMessage,
 } from '@app/core/room/actions/room.actions';
@@ -10,6 +11,7 @@ export const ROOM_STATE_TOKEN = 'room';
 
 export enum SubscriptionStatus {
   CONNECTED = 'CONNECTED',
+  CONNECTING = 'CONNECTING',
   DISCONNECTED = 'DISCONNECTED',
 }
 
@@ -39,6 +41,13 @@ export const roomInitialState: RoomState = {
 export const roomReducer = createReducer(
   roomInitialState,
   on(
+    connectingToSubscription,
+    (state: RoomState): RoomState => ({
+      ...state,
+      subscriptionStatus: SubscriptionStatus.CONNECTING,
+    })
+  ),
+  on(
     connectedToSubscription,
     (state: RoomState, { socketId }: { socketId: string }): RoomState => ({
       ...state,
@@ -60,12 +69,17 @@ const getRoomState = createFeatureSelector<RoomState>(ROOM_STATE_TOKEN);
 
 export const getRoom = createSelector(getRoomState, (roomState: RoomState) => roomState.room);
 
-export const getRoomId = createSelector(getRoom, (room: Room) => room.id);
+export const getSubscriptionStatus = createSelector(
+  getRoomState,
+  (roomState: RoomState) => roomState.subscriptionStatus
+);
 
 export const getSocketId = createSelector(
   getRoomState,
   (roomState: RoomState) => roomState.socketId
 );
+
+export const getRoomId = createSelector(getRoom, (room: Room) => room.id);
 
 export const getRoomAuth = createSelector(
   getRoomId,

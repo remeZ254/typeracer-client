@@ -1,38 +1,53 @@
 import { Injectable } from '@angular/core';
-import { RoomState } from '@app/core/room/reducers/room.reducer';
-import { ConfigService } from '@app/services/config.service';
-import { RoomModes } from '@app/shared/models/room/room.model';
-import { environment } from '@environments/environment';
-import { Store } from '@ngrx/store';
 
 import {
   connectedToSubscription,
+  connectingToSubscription,
   disconnectedFromSubscription,
 } from '@app/core/room/actions/room.actions';
-import { Observable, Observer } from 'rxjs';
-import { Socket, connect } from 'socket.io-client';
+import {
+  getSubscriptionStatus,
+  RoomState,
+  SubscriptionStatus,
+} from '@app/core/room/reducers/room.reducer';
+import { ConfigService } from '@app/services/config.service';
+import { RoomModes } from '@app/shared/models/room/room.model';
+import { environment } from '@environments/environment';
+import { select, Store } from '@ngrx/store';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
+import { connect, Socket } from 'socket.io-client';
 
 @Injectable()
 export class RoomSubscriptionService {
   private socket: Socket;
-  defaultEvent = 'room';
+  private readonly subscriptionStatus$: BehaviorSubject<SubscriptionStatus>;
+  private readonly defaultEvent = 'room';
 
-  constructor(private store: Store<RoomState>, private configService: ConfigService) {}
+  constructor(private store: Store<RoomState>, private configService: ConfigService) {
+    this.subscriptionStatus$ = new BehaviorSubject<SubscriptionStatus>(
+      SubscriptionStatus.DISCONNECTED
+    );
+    this.store.pipe(select(getSubscriptionStatus)).subscribe(this.subscriptionStatus$);
+  }
 
   connect(mode: RoomModes) {
-    if (!this.socket || !this.socket.connected) {
-      this.socket = connect(
-        environment.production ? window.location.host : this.configService.get('socketUrl'),
-        {
-          transports: ['websocket'],
-        }
+    if (this.subscriptionStatus$.getValue() !== SubscriptionStatus.CONNECTING) {
+      this.store.dispatch(connectingToSubscription());
+
+      if (!this.socket || !this.socket.connected) {
+        this.socket = connect(
+          environment.production ? window.location.host : this.configService.get('socketUrl'),
+          {
+            transports: ['websocket'],
+          }
+        );
+      }
+
+      this.socket.on('disconnect', () => this.store.dispatch(disconnectedFromSubscription()));
+      this.socket.on('connect', () =>
+        this.store.dispatch(connectedToSubscription({ socketId: this.socket.id, mode }))
       );
     }
-
-    this.socket.on('connect', () =>
-      this.store.dispatch(connectedToSubscription({ socketId: this.socket.id, mode }))
-    );
-    this.socket.on('disconnect', () => this.store.dispatch(disconnectedFromSubscription()));
   }
 
   disconnect() {
