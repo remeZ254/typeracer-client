@@ -47,6 +47,7 @@ export class RoomEffect {
       switchMap(({ mode }) =>
         this.actions$.pipe(
           ofType(disconnectedFromSubscription),
+          first(),
           map(() => connectToSubscription({ mode }))
         )
       )
