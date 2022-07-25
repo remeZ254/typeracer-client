@@ -12,6 +12,11 @@ export enum RoomModes {
   PRACTICE = 'PRACTICE',
 }
 
+export const roomModeDisplayResolver: Record<RoomModes, string> = {
+  [RoomModes.PRACTICE]: 'practice',
+  [RoomModes.PUBLIC]: 'room',
+};
+
 export enum RoomStatus {
   QUEUED = 'QUEUED',
   ACTIVE = 'ACTIVE',

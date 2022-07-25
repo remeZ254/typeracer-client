@@ -16,4 +16,12 @@
       (correctWord)="onCorrectWord($event)"
     ></app-race>
   </main>
+  <div class="nav-buttons-container">
+    <button class="nav-button back" (click)="goBack()">
+      Main menu (leave {{ roomModeDisplayResolver[o.room.mode] }})
+    </button>
+    <button class="nav-button next" *ngIf="o.room.status === RoomStatus.DONE" (click)="newRace()">
+      New race
+    </button>
+  </div>
 </ng-container>

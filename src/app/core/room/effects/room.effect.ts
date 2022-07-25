@@ -9,8 +9,11 @@ import { filter, first, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   connectedToSubscription,
   connectToSubscription,
+  disconnectedFromSubscription,
   disconnectFromSubscription,
+  exitRoom,
   newRoomMessage,
+  playAgain,
   sendPlayerUpdate,
 } from '../actions/room.actions';
 import { getRoomAuth, RoomState } from '../reducers/room.reducer';
@@ -37,6 +40,34 @@ export class RoomEffect {
     { dispatch: false }
   );
 
+  private readonly playAgain$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(playAgain),
+      tap(() => this.store.dispatch(disconnectFromSubscription())),
+      switchMap(({ mode }) =>
+        this.actions$.pipe(
+          ofType(disconnectedFromSubscription),
+          map(() => connectToSubscription({ mode }))
+        )
+      )
+    )
+  );
+
+  private readonly exitRoom$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(exitRoom),
+        tap(() => this.store.dispatch(disconnectFromSubscription())),
+        switchMap(() =>
+          this.actions$.pipe(
+            ofType(disconnectedFromSubscription),
+            map(() => this.router.navigate([RoutesEnum.HOME]))
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
   private readonly onRoomMessages$ = createEffect(() =>
     this.actions$.pipe(
       ofType(connectedToSubscription),
@@ -53,7 +84,7 @@ export class RoomEffect {
         this.actions$.pipe(
           ofType(newRoomMessage),
           first(),
-          tap(() => this.router.navigate([RoutesEnum.ROOM])),
+          tap(({ room }) => this.router.navigate([`${RoutesEnum.ROOM}/${room.id}`])),
           switchMap(() =>
             this.router.events.pipe(
               filter((event) => event instanceof NavigationStart),
@@ -87,5 +118,7 @@ export class RoomEffect {
     private subscriptionService: RoomSubscriptionService,
     private store: Store<RoomState>,
     private router: Router
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 }

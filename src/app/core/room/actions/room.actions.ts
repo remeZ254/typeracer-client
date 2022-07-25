@@ -9,6 +9,8 @@ enum RoomActions {
   DISCONNECTED = '[Room] Disconnected',
   NEW_ROOM_MESSAGE = '[Room] New Room Message',
   SEND_PLAYER_UPDATE = '[Room] Send Player Update',
+  PLAY_AGAIN = '[Room] Play Again',
+  EXIT_ROOM = '[Room] Exit Room'
 }
 
 export const connectToSubscription = createAction(
@@ -33,3 +35,7 @@ export const sendPlayerUpdate = createAction(
   RoomActions.SEND_PLAYER_UPDATE,
   props<{ wordIndex: number }>()
 );
+
+export const playAgain = createAction(RoomActions.PLAY_AGAIN, props<{ mode: RoomModes }>());
+
+export const exitRoom = createAction(RoomActions.EXIT_ROOM);
