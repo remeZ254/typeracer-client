@@ -61,6 +61,7 @@ export class RoomEffect {
         switchMap(() =>
           this.actions$.pipe(
             ofType(disconnectedFromSubscription),
+            first(),
             map(() => this.router.navigate([RoutesEnum.HOME]))
           )
         )
