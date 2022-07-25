@@ -11,6 +11,6 @@ export class FooterComponent {
   readonly items: string[];
 
   constructor(private configService: ConfigService) {
-    this.items = this.configService.get('footer');
+    this.items = this.configService.get('footer', 'contents');
   }
 }
