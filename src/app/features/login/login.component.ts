@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '@app/core/auth/service/auth.service';
 import { RoutesEnum } from '@app/shared/models/routes/routes.model';
-import { timer } from 'rxjs';
+import { first, timer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
   auth: string = '';
@@ -25,7 +25,9 @@ export class LoginComponent {
     } else {
       this.showError = true;
       this.shakeInput = true;
-      timer(300).subscribe(() => (this.shakeInput = false));
+      timer(300)
+        .pipe(first())
+        .subscribe(() => (this.shakeInput = false));
     }
   }
 

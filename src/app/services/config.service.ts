@@ -1,24 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { get } from 'lodash';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
-  private readonly config$: BehaviorSubject<any>;
+  private config: any;
 
-  constructor(private http: HttpClient) {
-    this.config$ = new BehaviorSubject<any>({});
-  }
+  constructor(private http: HttpClient) {}
 
   initConfiguration(): Observable<any> {
-    const config = this.http.get(environment.configUrl);
-    config.subscribe(this.config$);
-    return config;
+    return this.http.get(environment.configUrl).pipe(tap((config: any) => (this.config = config)));
   }
 
   get(...keys: string[]): any {
-    return get(this.config$.getValue(), keys);
+    return get(this.config, keys);
   }
 }

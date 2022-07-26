@@ -11,7 +11,7 @@ import {
 } from '@app/shared/models/room/room.model';
 import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 import { select, Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-room',
@@ -45,7 +45,7 @@ export class RoomComponent {
       )
     );
 
-    this.room$.subscribe((room: Room) => {
+    this.room$.pipe(first()).subscribe((room: Room) => {
       !room?.id && this.router.navigate([RoutesEnum.HOME]);
       this.quote = room?.text.quote;
       this.mode = room.mode;
