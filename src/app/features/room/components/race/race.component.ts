@@ -24,7 +24,7 @@ interface QuoteDisplay {
 })
 export class RaceComponent implements OnInit {
   @Input() roomStatus: RoomStatus;
-  @Input() uncompletedWords: string[];
+  @Input() quote: string;
   @Output() correctWord: EventEmitter<number>;
   input: string = '';
   isInvalid: boolean = false;
@@ -33,6 +33,7 @@ export class RaceComponent implements OnInit {
     valid: { inProgress: '', rest: '' },
     invalid: { inProgress: '', rest: '' },
   };
+  uncompletedWords: string[];
   readonly RoomStatus = RoomStatus;
   private completedChars: string = '';
   private completedWords: string[] = [];
@@ -43,6 +44,7 @@ export class RaceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uncompletedWords = this.quote.split(' ');
     this.formatDisplay();
   }
 

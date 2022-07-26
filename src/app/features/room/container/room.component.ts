@@ -11,7 +11,7 @@ import {
 } from '@app/shared/models/room/room.model';
 import { RoutesEnum } from '@app/shared/models/routes/routes.model';
 import { select, Store } from '@ngrx/store';
-import { first, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-room',
@@ -20,7 +20,7 @@ import { first, map, Observable } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class RoomComponent {
-  uncompletedWords: string[] = [];
+  quote: string;
   readonly socketId$: Observable<string>;
   readonly countdown$: Observable<string>;
   readonly room$: Observable<Room>;
@@ -45,9 +45,9 @@ export class RoomComponent {
       )
     );
 
-    this.room$.pipe(first()).subscribe((room: Room) => {
+    this.room$.subscribe((room: Room) => {
       !room?.id && this.router.navigate([RoutesEnum.HOME]);
-      this.uncompletedWords = room?.text.quote.split(' ');
+      this.quote = room?.text.quote;
       this.mode = room.mode;
     });
   }

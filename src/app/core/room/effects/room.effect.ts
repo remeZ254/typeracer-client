@@ -106,6 +106,7 @@ export class RoomEffect {
         switchMap(({ wordIndex }) =>
           this.store.pipe(
             select(getRoomAuth),
+            first(),
             tap(({ socketId, roomId }) =>
               this.subscriptionService.sendMessage('playerUpdate', { wordIndex, roomId, socketId })
             )
