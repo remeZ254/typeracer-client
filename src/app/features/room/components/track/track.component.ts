@@ -14,4 +14,8 @@ export class TrackComponent {
   getTrackIcon(airTrack: string): string {
     return `assets/svg/airtracks/${airTrack}.svg`;
   }
+
+  rankResolver(rank: number): string {
+    return `${rank}${[undefined, 'st', 'nd', 'rd'][(rank / 10) % 10 ^ 1 && rank % 10] || 'th'} place`;
+  }
 }

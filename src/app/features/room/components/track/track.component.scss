@@ -32,11 +32,18 @@
   }
 
   .score {
-    @apply w-1/6;
-    @apply text-2xl;
+    @apply w-1/12;
 
     .vertical-center {
       @apply inline-block align-middle h-full;
+    }
+
+    .wpm {
+      @apply text-2xl;
+    }
+
+    .rank {
+      @apply text-xl;
     }
   }
 }

@@ -29,6 +29,7 @@ export interface Player {
   wordIndex: number;
   wpm: number;
   track: string;
+  rank?: number;
 }
 
 export interface Quote {

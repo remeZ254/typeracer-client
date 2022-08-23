@@ -13,6 +13,10 @@
   </div>
   <div class="score">
     <span class="vertical-center"></span>
-    <span>{{ player.wpm }} wpm</span>
+    <span class="wpm">{{ player.wpm }} wpm</span>
+  </div>
+  <div class="score">
+    <span class="vertical-center"></span>
+    <span class="rank" *ngIf="player.rank"> {{ rankResolver(player.rank) }}</span>
   </div>
 </div>
