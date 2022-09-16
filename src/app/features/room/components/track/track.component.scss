@@ -1,9 +1,10 @@
 .player {
-  @apply flex flex-row;
+  @apply flex flex-row justify-between;
   @apply text-slate-600 font-bold dark:text-slate-300;
 
   .track {
-    @apply w-5/6 p-1;
+    width: 83%;
+    @apply p-1;
     @apply border-dashed border-amber-400 border-b-4;
 
     .racer {
@@ -31,19 +32,25 @@
     }
   }
 
-  .score {
-    @apply w-1/12;
+  .vertical-center {
+    @apply inline-block align-middle h-full;
+  }
 
-    .vertical-center {
-      @apply inline-block align-middle h-full;
-    }
+  .wpm-container {
+    width: 10%;
+    text-align: end;
 
     .wpm {
       @apply text-2xl;
     }
+  }
+
+  .rank-container {
+    width: 7%;
+    text-align: end;
 
     .rank {
-      @apply text-xl;
+      @apply text-lg;
     }
   }
 }

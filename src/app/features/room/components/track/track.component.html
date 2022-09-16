@@ -11,12 +11,12 @@
       <img class="vehicle" [src]="getTrackIcon(player.track)" alt="adir" />
     </div>
   </div>
-  <div class="score">
+  <div class="wpm-container">
     <span class="vertical-center"></span>
     <span class="wpm">{{ player.wpm }} wpm</span>
   </div>
-  <div class="score">
+  <div class="rank-container">
     <span class="vertical-center"></span>
-    <span class="rank" *ngIf="player.rank"> {{ rankResolver(player.rank) }}</span>
+    <span class="rank" *ngIf="player.rank">{{ rankResolver(player.rank) }}</span>
   </div>
 </div>
