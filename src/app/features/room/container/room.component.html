@@ -12,7 +12,7 @@
     <app-track [room]="o.room" [playerId]="o.playerId"></app-track>
     <app-race
       [roomStatus]="o.room.status"
-      [quote]="quote"
+      [quote]="o.room.text.quote"
       (correctWord)="onCorrectWord($event)"
     ></app-race>
   </main>
